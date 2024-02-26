@@ -1,0 +1,51 @@
+/* Styling for the navigation bar */
+nav {
+    background-image: url('/images/logo.jpg');
+    background-size: cover; /* Adjust as needed */
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center the items horizontally */
+}
+
+nav a {
+    float: left; /* Adjusted from "float: middle;" */
+    display: block;
+    color: #f1f2f5fa;
+    text-align: right;
+    padding: 14px 25px; /* Adjusted padding to make it wider */
+    text-decoration: none;
+    transition: background-color 0.3s;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px; 
+    font-weight: bold; 
+}
+
+/* Keyframes for flashing effect */
+@keyframes flash {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+/* Change the color of the active/current link */
+nav a.active {
+   animation: flash 3s infinite;
+}
+
+/* Add a darker background color on hover */
+nav a:hover {
+    transform: scale(1.3);
+}
+
+/* Styling for the content section */
+.details {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #8bd3efd9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

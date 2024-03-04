@@ -1,84 +1,38 @@
 import React, { useState } from 'react';
 import './App.css';
-import { fetchArea, fetchCompetition, fetchStandings, fetchMatches, fetchTeams, fetchScorers } from './Api'; // Import your API functions
+import { findMatchesByFilters } from './Api'; // Import the function from Api.js
 
 function App() {
-  const [data, setData] = useState(null);
+  const [matches, setMatches] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [filters, setFilters] = useState({
+    season: '',
+    status: '',
+    venue: '',
+    date: ''
+  });
 
-  // Function to fetch area
-  const handleFetchArea = async (areaId) => {
-    setLoading(true);
-    try {
-      const areaData = await fetchArea(areaId);
-      setData(areaData);
-    } catch (error) {
-      console.error('Error fetching area data:', error);
-    } finally {
-      setLoading(false);
-    }
+  const seasons = ['2023-2024', '2022-2023', '2021-2022']; // seasons
+  const statuses = ['SCHEDULED', 'LIVE', 'FINISHED']; // statuses
+  const venues = ['HOME', 'AWAY']; // venues
+  const dates = ['2023-10-15', '2023-10-16', '2023-10-17']; // dates
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFilters({
+      ...filters,
+      [name]: value
+    });
   };
 
-  // Function to fetch competition
-  const handleFetchCompetition = async (competitionCode) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setLoading(true);
     try {
-      const competitionData = await fetchCompetition(competitionCode);
-      setData(competitionData);
+      const data = await findMatchesByFilters(filters);
+      setMatches(data);
     } catch (error) {
-      console.error('Error fetching competition data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Function to fetch standings
-  const handleFetchStandings = async (competitionId, matchday, season, date) => {
-    setLoading(true);
-    try {
-      const standingsData = await fetchStandings(competitionId, matchday, season, date);
-      setData(standingsData);
-    } catch (error) {
-      console.error('Error fetching standings data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Function to fetch matches
-  const handleFetchMatches = async (competitionId, dateFrom, dateTo, stage, status, matchday, group, season) => {
-    setLoading(true);
-    try {
-      const matchesData = await fetchMatches(competitionId, dateFrom, dateTo, stage, status, matchday, group, season);
-      setData(matchesData);
-    } catch (error) {
-      console.error('Error fetching matches data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Function to fetch teams
-  const handleFetchTeams = async (competitionId, season) => {
-    setLoading(true);
-    try {
-      const teamsData = await fetchTeams(competitionId, season);
-      setData(teamsData);
-    } catch (error) {
-      console.error('Error fetching teams data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Function to fetch scorers
-  const handleFetchScorers = async (competitionId, limit, season) => {
-    setLoading(true);
-    try {
-      const scorersData = await fetchScorers(competitionId, limit, season);
-      setData(scorersData);
-    } catch (error) {
-      console.error('Error fetching scorers data:', error);
+      console.error('Error finding matches:', error);
     } finally {
       setLoading(false);
     }
@@ -87,19 +41,54 @@ function App() {
   return (
     <div className="App">
       <h1>Soccer+</h1>
-      <div className="buttons">
-        <button onClick={() => handleFetchArea(123)} disabled={loading}>Fetch Area</button>
-        <button onClick={() => handleFetchCompetition('PL')} disabled={loading}>Fetch Competition</button>
-        <button onClick={() => handleFetchStandings(123, 10, '2023', '2023-01-01')} disabled={loading}>Fetch Standings</button>
-        <button onClick={() => handleFetchMatches(123, '2023-01-01', '2023-12-31', 'GROUP_STAGE', 'SCHEDULED', 1, 'A', '2023')} disabled={loading}>Fetch Matches</button>
-        <button onClick={() => handleFetchTeams(123, '2023')} disabled={loading}>Fetch Teams</button>
-        <button onClick={() => handleFetchScorers(123, 10, '2023')} disabled={loading}>Fetch Scorers</button>
-        
-      </div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Season:
+          <select name="season" value={filters.season} onChange={handleChange}>
+            <option value="">Select season...</option>
+            {seasons.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Status:
+          <select name="status" value={filters.status} onChange={handleChange}>
+            <option value="">Select status...</option>
+            {statuses.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Venue:
+          <select name="venue" value={filters.venue} onChange={handleChange}>
+            <option value="">Select venue...</option>
+            {venues.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Date:
+          <select name="date" value={filters.date} onChange={handleChange}>
+            <option value="">Select date...</option>
+            {dates.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+        <button type="submit" disabled={loading}>Search</button>
+      </form>
       {loading && <p>Loading...</p>}
-      {data && (
-        <div className="data">
-          <pre>{JSON.stringify(data, null, 2)}</pre>
+      {matches && (
+        <div className="matches">
+          <h2>Matches</h2>
+          <ul>
+            {matches.map(match => (
+              <li key={match.id}>{match.homeTeam} vs {match.awayTeam}</li>
+            ))}
+          </ul>
         </div>
       )}
     </div>

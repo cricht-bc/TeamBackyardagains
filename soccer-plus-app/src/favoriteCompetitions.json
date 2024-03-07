@@ -1,0 +1,22 @@
+ [
+    {
+        "id": 2166,
+        "area": {
+            "id": 2001,
+            "name": "Africa",
+            "code": "AFR",
+            "flag": null
+        },
+        "name": "AFC Champions League",
+        "code": "ACL",
+        "type": "CUP",
+        "emblem": null,
+        "plan": "TIER_FOUR",
+        "currentSeason": {
+            "id": 1559,
+            "startDate": "2022-04-06",
+            "endDate": "2023-05-05",
+            "currentMatchday": null,
+            "winner": null
+        };
+ ]

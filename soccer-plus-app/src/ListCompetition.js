@@ -5,6 +5,7 @@ function ListCompetition() {
   const [competitions, setCompetitions] = useState([]);
   const [showAll, setShowAll] = useState(false);
   const [selectedCompetition, setSelectedCompetition] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,13 +28,34 @@ function ListCompetition() {
     setSelectedCompetition(competition);
   };
 
+  const handleSaveFavorite = async () => {
+    try {
+      if (selectedCompetition) {
+        await axios.post('/SavedCompetitions', { competition: selectedCompetition });
+        console.log('Competition saved successfully');
+      }
+    } catch (error) {
+      console.error('Error saving competition:', error);
+    }
+  };
+  
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredCompetitions = competitions.filter((competition) =>
+    competition.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div style={{ display: 'flex' }}>
       <div style={{ flex: 1 }}>
         <h2>Competitions</h2>
+        <input type="text" placeholder="Search competitions..." value={searchQuery} onChange={handleSearchChange} />
         <ul style={{ listStyleType: 'none', padding: 0 }}>
-          {competitions
-            .slice(0, showAll ? competitions.length : 15) // Show only the first 15 competitions
+          {filteredCompetitions
+            .slice(0, showAll ? filteredCompetitions.length : 15)
             .map((competition) => (
               <li
                 key={competition.id}
@@ -56,6 +78,7 @@ function ListCompetition() {
           {selectedCompetition.emblem && (
             <img src={selectedCompetition.emblem} alt={selectedCompetition.name} style={{ maxWidth: '100px' }} />
           )}
+          <button onClick={handleSaveFavorite}>Save as Favorite</button>
         </div>
       )}
     </div>
@@ -63,3 +86,4 @@ function ListCompetition() {
 }
 
 export default ListCompetition;
+

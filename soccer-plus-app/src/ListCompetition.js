@@ -28,17 +28,6 @@ function ListCompetition() {
     setSelectedCompetition(competition);
   };
 
-  const handleSaveFavorite = async () => {
-    try {
-      if (selectedCompetition) {
-        await axios.post('/SavedCompetitions', { competition: selectedCompetition });
-        console.log('Competition saved successfully');
-      }
-    } catch (error) {
-      console.error('Error saving competition:', error);
-    }
-  };
-  
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -78,7 +67,6 @@ function ListCompetition() {
           {selectedCompetition.emblem && (
             <img src={selectedCompetition.emblem} alt={selectedCompetition.name} style={{ maxWidth: '100px' }} />
           )}
-          <button onClick={handleSaveFavorite}>Save as Favorite</button>
         </div>
       )}
     </div>
@@ -86,4 +74,3 @@ function ListCompetition() {
 }
 
 export default ListCompetition;
-

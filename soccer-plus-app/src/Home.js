@@ -1,12 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-function Home() {
+
+const Home = () => {
   return (
     <div>
-      <h2>Welcome to Soccer+ App</h2>
+      {/* Your main content */}
+      <h2>Welcome to Soccer+</h2>
+      {/* Add more content as needed */}
+
     </div>
   );
-}
+};
+
 
 export default Home;
+

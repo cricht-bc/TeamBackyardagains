@@ -2,32 +2,37 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './Home';
 import ListCompetition from './ListCompetition';
-import SavedCompetitions from './SavedCompetitions';
+import VideoSection from './VideoSection';
+import './styles.css'; // Import your CSS file
 
 const App = () => {
   return (
-    <Router>
-      <div>
-        <h1>Soccer+</h1>
-        <nav>
-          <ul style={{ display: 'flex', listStyleType: 'none' }}>
-            <li style={{ marginRight: '20px' }}>
-              <Link to="/">Home</Link>
-            </li>
-            <li style={{ marginRight: '20px' }}>
-              <Link to="/ListCompetition">Competitions</Link>
-            </li>
-            <li>
-              <Link to="/SavedCompetitions">Favorites</Link>
-            </li>
-          </ul>
-        </nav>
+<Router>
+  <div>
+    <header className="header">
+      <h1 className="logo">Soccer+</h1>
+      <nav>
+        <ul className="nav-links">
+          <li>
+            <Link to="/" className="nav-link">Home</Link>
+          </li>
+          <li>
+            <Link to="/competitions" className="nav-link">Competitions</Link>
+          </li>
+          <li>
+            <Link to="/videos" className="nav-link">Videos</Link>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/ListCompetition" element={<ListCompetition />} />
-          <Route path="/SavedCompetitions" element={<SavedCompetitions />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/competitions" element={<ListCompetition />} />
+            <Route path="/videos" element={<VideoSection />} />
+          </Routes>
+        </main>
       </div>
     </Router>
   );

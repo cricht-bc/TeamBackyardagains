@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+/*Competitions page funtions*/
 function ListCompetition() {
   const [competitions, setCompetitions] = useState([]);
   const [showAll, setShowAll] = useState(false);
   const [selectedCompetition, setSelectedCompetition] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-
+/*fetch data form /public/data.json*/
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,16 +19,16 @@ function ListCompetition() {
 
     fetchData();
   }, []);
-
+/*show all list items*/
   const toggleShowAll = () => {
     setShowAll(!showAll);
   };
-
+/*click a competition to show detail*/
   const handleCompetitionClick = (competition) => {
     setSelectedCompetition(competition);
   };
 
-
+/*search a specific competition*/
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };

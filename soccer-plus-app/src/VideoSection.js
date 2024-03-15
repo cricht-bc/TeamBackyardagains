@@ -8,7 +8,7 @@ function VideoSection() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredVideos, setFilteredVideos] = useState([]);
   const [showAll, setShowAll] = useState(false);
-
+/* fecth data from api */
   useEffect(() => {
     const fetchVideos = async () => {
       try {
@@ -35,15 +35,15 @@ function VideoSection() {
       )
     );
   }, [videos, searchQuery]);
-
+/* Search function*/
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
-
+/* click to show more info*/
   const handleVideoClick = (video) => {
     setSelectedVideo(video);
   };
-
+/* show whole list*/
   const toggleShowAll = () => {
     setShowAll(!showAll);
   };

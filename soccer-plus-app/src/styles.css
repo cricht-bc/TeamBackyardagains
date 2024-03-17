@@ -33,7 +33,9 @@
     margin: 0 20px;
     transition: font-size 0.3s, color 0.3s; /* Add transition for smooth effect */
   }
-  
+  .nav-links:hover {
+      color: lightgreen;
+  }
   .nav-link:hover {
     color: #ffd700; /* Change color on hover */
   }

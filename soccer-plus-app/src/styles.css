@@ -9,6 +9,7 @@
   body {
     background-color: #f8f8d2; /* Dark grey background */
     font-family: 'Comic Sans MS', cursive, sans-serif; /* Cute font */
+    color: rgb(29, 125, 3);
   }
   
   .logo {
@@ -45,12 +46,86 @@
     animation: flashing 1s infinite alternate; /* Add flashing animation */
   }
   
-  @keyframes flashing {
-    from {
-      font-size: 28px;
-    }
-    to {
-      font-size: 32px;
-    }
+ 
+  .flashing-text {
+    animation: flash 1s infinite alternate; /* Flashing animation */
   }
   
+  @keyframes flash {
+    from {
+      opacity: 1; /* Fully visible */
+    }
+    to {
+      opacity: 0; /* Invisible */
+    }
+  }
+  User
+  /*competitions list page*/
+  
+  .competition-list li {
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+  
+  }
+  
+  .competition-list li:hover {
+    background-color: lightgray; 
+    cursor: pointer; /* pointer cursor */
+    transform: scale(1.05); 
+  
+  }
+  
+  .competition-list .selected {
+    background-color: lightgreen;
+  }
+
+/* videos page*/
+
+.video-section-container {
+  display: flex;
+}
+
+.video-list {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.video-list h2 {
+  margin-bottom: 10px;
+}
+
+.video-list input[type="text"] {
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%;
+}
+
+.video-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+
+.video-list li:hover {
+  background-color: lightgray;
+  cursor: pointer; /* Pointer cursor */
+  transform: scale(1.05); 
+}
+
+.video-list .selected {
+  background-color: lightgreen; 
+}
+
+.video-details {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.video-details h2 {
+  margin-bottom: 10px;
+}
+
+.video-details iframe {
+  width: 100%;
+  height: 315px;
+}
+

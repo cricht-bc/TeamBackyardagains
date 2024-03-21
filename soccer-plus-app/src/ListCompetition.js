@@ -37,19 +37,20 @@ function ListCompetition() {
     competition.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+
   return (
     <div style={{ display: 'flex' }}>
       <div style={{ flex: 1 }}>
         <h2>Competitions</h2>
         <input type="text" placeholder="Search competitions..." value={searchQuery} onChange={handleSearchChange} />
-        <ul style={{ listStyleType: 'none', padding: 0 }}>
+        <ul className="competition-list">
           {filteredCompetitions
             .slice(0, showAll ? filteredCompetitions.length : 15)
             .map((competition) => (
               <li
                 key={competition.id}
                 onClick={() => handleCompetitionClick(competition)}
-                style={{ cursor: 'pointer' }}
+                className={selectedCompetition && selectedCompetition.id === competition.id ? 'selected' : ''}
               >
                 {competition.name}
               </li>

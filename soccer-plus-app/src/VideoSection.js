@@ -49,9 +49,9 @@ function VideoSection() {
   };
 
   return (
-    <div style={{ display: 'flex' }}>
-      <div style={{ flex: 1 }}>
-        <h2>Football Videos</h2>
+    <div className="video-section-container">
+      <div className="video-list">
+        <h2>Match Videos</h2>
         <input
           type="text"
           placeholder="Search videos..."
@@ -63,9 +63,9 @@ function VideoSection() {
         ) : (
           <ul>
             {filteredVideos
-              .slice(0, showAll ? filteredVideos.length : 10) // Change 10 to the desired initial number of videos to display
+              .slice(0, showAll ? filteredVideos.length : 10)
               .map((video, index) => (
-                <li key={index} style={{ cursor: 'pointer' }} onClick={() => handleVideoClick(video)}>
+                <li key={index} className={selectedVideo === video ? 'selected' : ''} onClick={() => handleVideoClick(video)}>
                   {video.title}
                 </li>
               ))}
@@ -78,7 +78,7 @@ function VideoSection() {
           <button onClick={toggleShowAll}>Show less</button>
         )}
       </div>
-      <div style={{ flex: 2, marginLeft: '20px' }}>
+      <div className="video-details">
         {selectedVideo && (
           <>
             <h2>{selectedVideo.title}</h2>

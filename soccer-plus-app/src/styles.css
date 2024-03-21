@@ -34,21 +34,12 @@
     margin: 0 20px;
     transition: font-size 0.3s, color 0.3s; /* Add transition for smooth effect */
   }
-  .nav-links:hover {
-      color: lightgreen;
-  }
   .nav-link:hover {
-    color: #ffd700; /* Change color on hover */
+      color: lightgreen;/* Change color on hover */
   }
-  
-  .nav-link.active {
-    font-size: 28px; /* Increase font size for active link */
-    animation: flashing 1s infinite alternate; /* Add flashing animation */
-  }
-  
  
   .flashing-text {
-    animation: flash 1s infinite alternate; /* Flashing animation */
+    animation: flash 2s infinite; /* Adjust duration and timing as needed */
   }
   
   @keyframes flash {
@@ -59,7 +50,7 @@
       opacity: 0; /* Invisible */
     }
   }
-  User
+  
   /*competitions list page*/
   
   .competition-list li {
